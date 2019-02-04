@@ -232,6 +232,43 @@ rbac:
   # Role binding kind (RoleBinding or ClusterRoleBinding)
   roleBindingKind: ClusterRoleBinding
 
+# Add zero or more additional containers - supported attributes/values are from the PodSpec core
+extraContainers:
+#  - name: vpn
+#    image: "myorg/image_name:version"
+#    imagePullPolicy: "Always"
+#    command:
+#      - "/app/entrypoint.sh"
+#    args:
+#      - "100.100.100.100"
+#    securityContext:
+#      capabilities:
+#        add: ["NET_ADMIN"]
+#    resources:
+#      requests:
+#        cpu: "100m"
+#        memory: "100Mi"
+#      limits:
+#        cpu: "500m"
+#        memory: "100Mi"
+#    volumeMounts:
+#      - name: some-volume-name
+#        mountPath: "/root/some_path"
+#        readOnly: true
+#    env:
+#      - name: AWS_REGION
+#        value: us-east-1
+#  - name: logging
+#    image: "myorg/my-logging-agent-image"
+#    imagePullPolicy: "Always"
+#    resources:
+#      requests:
+#        cpu: "100m"
+#        memory: "100Mi"
+#      limits:
+#        cpu: "500m"
+#        memory: "100Mi"
+
 ## Backup cronjob configuration
 ## Ref: https://github.com/nuvo/kube-tasks
 backup:

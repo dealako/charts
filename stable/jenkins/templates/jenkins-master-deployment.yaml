@@ -109,6 +109,11 @@ spec:
               mountPath: /usr/share/jenkins/ref/secrets/
               name: secrets-dir
       containers:
+        {{- range .Values.extraContainers }}
+        -
+{{ toYaml . | indent 10 }}
+        {{- end }}
+
         - name: {{ template "jenkins.fullname" . }}
           image: "{{ .Values.Master.Image }}:{{ .Values.Master.ImageTag }}"
           imagePullPolicy: "{{ .Values.Master.ImagePullPolicy }}"
