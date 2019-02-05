@@ -240,6 +240,31 @@ If running upon a cluster with RBAC enabled you will need to do the following:
 * Create a Jenkins credential of type Kubernetes service account with service account name provided in the `helm status` output.
 * Under configure Jenkins -- Update the credentials config in the cloud section to use the service account credential you created in the step above.
 
+## Extra Containers
+
+An optional list of additional containers can be specified to run within the pod alongside the Jenkins master container. 
+Multi-container pods have a few advantages including:
+
+* private communication between containers in the pod
+* shared volumes (writing to a shared file or directory)
+* shared networking
+
+Common uses for additional containers, sometimes generically referred to as a 'sidecar' containers, are:
+
+* logging utilities, sync services, watchers, and monitoring agents. For example, a benefit of moving the logging work
+  to a separate container is that if the logging code is faulty, the fault will be isolated to that container — an
+  exception thrown in the nonessential logging code won't bring down the main application.
+* a separate container can be used via an adapter pattern to standardize application output or monitoring 
+  data for aggregation.
+* an additional container can be used to proxy specific network traffic through a VPN. In this case, the VPN client and
+  related configuration would reside in a separate container - the details would be transparent to the main container.
+
+### Extra Container Configuration
+
+To enable one or more extra containers, uncomment the `extraContainers` element in the values.yaml file and set the
+appropriate image, command, args, environment, permissions, volumes, etc. The `extraContainers` accepts a list of
+containers to allow more than one. The additional container details will be added to the deployment template/resource.
+
 ## Backup
 
 Adds a backup CronJob for jenkins, along with required RBAC resources.
